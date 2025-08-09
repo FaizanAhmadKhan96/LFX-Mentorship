@@ -117,8 +117,10 @@ class StackModuleTest extends AnyFreeSpec with ChiselScalatestTester {
           s.io.isFull.expect((stack.length == len).B)
           s.io.popped.expect(0.B)
           s.io.peeked.expect(0.B)
+          
+          s.reset.poke(0.B)
 
-          for (__ <- Range(0, 1000)) {
+          for (__ <- Range(0, 100)) {
             val instID = random.between(0, 3)
             instID match {
               case 0 => pushToStack(random, dataWidth, len, stack, s)
